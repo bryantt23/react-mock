@@ -17,7 +17,7 @@ export class Todo extends Component {
           handleClick={e => {
             const direction = e.target.innerText;
             console.log('e', e.target.innerText);
-            this.props.handleClick(index, direction + ' ' + index);
+            this.props.handleClick(index, direction);
           }}
         />
       );

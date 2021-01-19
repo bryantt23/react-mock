@@ -1,13 +1,20 @@
 import Todos from './Todos';
 import './App.css';
+import React from 'react';
 
-function App() {
-  const todos = [
-    { name: 'Winnie', todos: ['buy eggs', 'buy milk'] },
-    { name: 'Brad', todos: ['buy meat', 'buy vegi'] },
-    { name: 'Bob', todos: ['buy meat', 'buy vegi'] },
-    { name: 'Thomas', todos: ['buy meat', 'buy vegi'] }
-  ];
+const todosArr = [
+  { name: 'Winnie', todos: ['buy eggs', 'buy milk'] },
+  { name: 'Brad', todos: ['buy meat', 'buy vegi'] },
+  { name: 'Bob', todos: ['buy meat', 'buy vegi'] },
+  { name: 'Thomas', todos: ['buy meat', 'buy vegi'] }
+];
+class App extends React.Component {
+  constructor() {
+    super();
+    this.state = {
+      todos: todosArr
+    };
+  }
 
   //todos
   //deal with person 0, index 0, left click later
@@ -16,21 +23,35 @@ function App() {
   // winnie, eggs click right
   // result brad buy eggs, buy meat, buy vegi
 
-  const handleClick = (val, personIndex, direction) => {
+  handleClick = (taskIndex, direction, personIndex) => {
     // e.preventDefault();
     console.log('handleClick');
-    console.log('task index in App', val);
-    console.log('personIndex in App', personIndex);
-    console.log('personIndex', direction);
+    console.log('task index ', taskIndex);
+    console.log('direction', direction);
+    console.log('personIndex', personIndex);
+
+    const todosCopy = [...this.state.todos];
+
+    const removeItem = todosCopy[personIndex].todos.splice(taskIndex, 1);
+
+    if (direction === 'Left' && personIndex > 0) {
+      todosCopy[personIndex - 1].todos.splice(taskIndex, 0, removeItem);
+    } else if (direction === 'Right' && personIndex < todosCopy.length - 1) {
+      todosCopy[personIndex + 1].todos.splice(taskIndex, 0, removeItem);
+    }
+
+    this.setState({ todos: todosCopy });
+
     // console.log(e.target.value);
     // console.log(e.target.value);
   };
-
-  return (
-    <div className='App'>
-      <Todos todos={todos} handleClick={handleClick} />
-    </div>
-  );
+  render() {
+    return (
+      <div className='App'>
+        <Todos todos={this.state.todos} handleClick={this.handleClick} />
+      </div>
+    );
+  }
 }
 
 export default App;

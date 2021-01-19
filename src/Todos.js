@@ -13,8 +13,8 @@ export class Todos extends Component {
         <Todo
           key={personIndex}
           todo={todo}
-          handleClick={(val, direction) =>
-            this.props.handleClick(val, direction, personIndex)
+          handleClick={(taskIndex, direction) =>
+            this.props.handleClick(taskIndex, direction, personIndex)
           }
         />
       );
