@@ -14,9 +14,11 @@ export class Todo extends Component {
         <Task
           key={index}
           task={task}
+          // e from child
           handleClick={e => {
             const direction = e.target.innerText;
             console.log('e', e.target.innerText);
+            // index, direction from parent, direction from here
             this.props.handleClick(index, direction);
           }}
         />

@@ -11,16 +11,17 @@ export class Task extends Component {
     return (
       <div>
         <button
-          onClick={index => {
-            this.props.handleClick(index);
+          onClick={e => {
+            this.props.handleClick(e);
           }}
         >
           Left
         </button>
         {task}
         <button
-          onClick={index => {
-            this.props.handleClick(index);
+          // function uses e, which is used by parent
+          onClick={e => {
+            this.props.handleClick(e);
           }}
         >
           Right

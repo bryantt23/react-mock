@@ -23,6 +23,7 @@ class App extends React.Component {
   // winnie, eggs click right
   // result brad buy eggs, buy meat, buy vegi
 
+  //gets parameters from children
   handleClick = (taskIndex, direction, personIndex) => {
     // e.preventDefault();
     console.log('handleClick');
@@ -32,11 +33,13 @@ class App extends React.Component {
 
     const todosCopy = [...this.state.todos];
 
-    const removeItem = todosCopy[personIndex].todos.splice(taskIndex, 1);
+    let removeItem;
 
     if (direction === 'Left' && personIndex > 0) {
+      removeItem = todosCopy[personIndex].todos.splice(taskIndex, 1);
       todosCopy[personIndex - 1].todos.splice(taskIndex, 0, removeItem);
     } else if (direction === 'Right' && personIndex < todosCopy.length - 1) {
+      removeItem = todosCopy[personIndex].todos.splice(taskIndex, 1);
       todosCopy[personIndex + 1].todos.splice(taskIndex, 0, removeItem);
     }
 
@@ -48,6 +51,7 @@ class App extends React.Component {
   render() {
     return (
       <div className='App'>
+        {/* pass in function */}
         <Todos todos={this.state.todos} handleClick={this.handleClick} />
       </div>
     );
